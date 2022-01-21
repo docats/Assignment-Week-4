@@ -9,20 +9,21 @@
 </head>
 <body>
     
-    <form action="" method="post">
+    <form action="{{url_for('sigin')}}" method="post">
         <section class="container">
             <h1>歡迎光臨，請輸入帳號密碼</h1>
             <h3>登入系統</h3>
             <div class="login">
                 <div class="ac"> <label for="uname">帳號</label>
                     <input type="text" name="uname" id="" placeholder="請輸入您的帳號">
+                    
                 </div>
                <div class="pass_word">
                 <label for="psw">密碼</label>
                 <input type="password" name="psw" id="" placeholder="請輸入您的密碼">
                </div>
                <div class="btn_lg_fram">
-                <button type="button" class="btn_login">登入</button>
+                <button type="submit" class="btn_login">登入</button>
                </div>
                 
             </div>  

@@ -1,5 +1,4 @@
 from distutils.log import debug
-
 from flask import Flask # 載入Flask 
 from flask import request # 載入Request物件(要取得POST參數值)
 from flask import redirect # 載入redirect函式

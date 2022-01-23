@@ -1,5 +1,4 @@
 from distutils.log import debug
-
 from flask import Flask # 載入Flask 
 from flask import request # 載入Request物件(要取得POST參數值)
 from flask import redirect # 載入redirect函式
@@ -31,19 +30,20 @@ def sigin():
     password = request.form['psw']
     if username == "test" and password == "test":
         session["username"]=username
-        return redirect('/member/?login=已登入')
+        return redirect('/member')
     elif len(username)==0 or len(password)==0:
         return redirect('/empty/?message=帳號或密碼不能為空')
     else:
         return redirect('/error/?message=帳號或密碼錯誤')
 
 # 建立路徑 /member對應的處理函式
-@app.route("/member/",methods=['GET'])
-def member():    
-    login=request.args.get("login","")
-    name=session["username"]
-    print("使用者名稱:",name)
-    return  render_template('member.html',login=login)
+@app.route("/member",methods=['GET'])
+def member():
+    if session.get("username"):   
+        return  render_template('member.html')
+    else:
+        return redirect("/signout")
+
 
 # 建立路徑 /error對應的處理函式
 @app.route("/error/",methods=['GET'])
@@ -61,14 +61,6 @@ def empty():
 @app.route("/signout",methods=['GET'])
 def signout():
     return redirect("/")
-
-# 動態路由:建立路徑 /user/使用者名稱，對應的處理函式
-# @app.route("/user/<username>")
-# def handleUser(username):
-#     if username == "Iris":
-#         return "你好 "+username
-#     else:
-#         return "Hello "+username
 
 # (啟動網站伺服器)host,port,debug等參數，要在這邊設定
 app.run(port=3000) 
